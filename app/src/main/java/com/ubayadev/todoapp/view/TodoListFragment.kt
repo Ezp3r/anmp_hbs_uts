@@ -15,7 +15,7 @@ import com.ubayadev.todoapp.viewmodel.ListTodoViewModel
 
 class TodoListFragment : Fragment() {
     private lateinit var binding:FragmentTodoListBinding
-    private var adapter = TodoListAdapter(arrayListOf(), { todo -> viewModel.checkTask(todo) })
+    private var adapter = TodoListAdapter(arrayListOf(), { todo -> viewModel.markAsDone(todo.uuid) })
     private lateinit var viewModel:ListTodoViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

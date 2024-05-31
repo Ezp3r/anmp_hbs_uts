@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ubayadev.todoapp.util.DB_NAME
 import com.ubayadev.todoapp.util.MIGRATION_1_2
 
-@Database(entities = arrayOf(Todo::class), version = 2)
+@Database(entities = arrayOf(Todo::class), version = 3)
 abstract class TodoDatabase:RoomDatabase() {
     abstract fun todoDao():TodoDao
 
@@ -17,7 +19,7 @@ abstract class TodoDatabase:RoomDatabase() {
 
         fun buildDatabase(context:Context) = Room.databaseBuilder(
             context.applicationContext, TodoDatabase::class.java, DB_NAME
-        )   .addMigrations(MIGRATION_1_2)
+        )   .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
             .build()
 
         operator fun invoke(context:Context) {
@@ -27,6 +29,12 @@ abstract class TodoDatabase:RoomDatabase() {
                         instance = it
                     }
                 }
+            }
+        }
+
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Todo ADD COLUMN is_done INTEGER NOT NULL DEFAULT 0")
             }
         }
     }
