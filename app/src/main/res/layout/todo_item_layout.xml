@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{todo.isDone == 1 ? '-' + todo.title : todo.title}"
+            android:text="@{todo.isDone == 1 ? todo.title : todo.title}"
             android:checked="@{todo.isDone == 1}"
             android:onCheckedChanged="@{(cb, isChecked)-> listener.onTodoCheckedChange(cb, isChecked, todo)}"
             app:layout_constraintBottom_toBottomOf="parent"
