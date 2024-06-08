@@ -15,3 +15,7 @@ interface TodoEditClickListener {
 interface RadioClickListener {
     fun onRadioClick(v:View)
 }
+
+interface TodoSaveChangesClick {
+    fun onTodoSaveChangesClick(v:View, obj: Todo)
+}

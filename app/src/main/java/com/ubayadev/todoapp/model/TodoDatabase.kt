@@ -8,6 +8,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ubayadev.todoapp.util.DB_NAME
 import com.ubayadev.todoapp.util.MIGRATION_1_2
+import com.ubayadev.todoapp.util.MIGRATION_2_3
 
 @Database(entities = arrayOf(Todo::class), version = 3)
 abstract class TodoDatabase:RoomDatabase() {
@@ -29,12 +30,6 @@ abstract class TodoDatabase:RoomDatabase() {
                         instance = it
                     }
                 }
-            }
-        }
-
-        private val MIGRATION_2_3 = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE Todo ADD COLUMN is_done INTEGER NOT NULL DEFAULT 0")
             }
         }
     }
